@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './auth/pages/login/login-page.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
+import { tokenInterceptorProvider } from './auth/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { LayoutComponent } from './layout/layout.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    tokenInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
