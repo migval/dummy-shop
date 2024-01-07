@@ -1,0 +1,9 @@
+<h1>Favourites</h1>
+
+<div *ngIf="favouriteProduct.length > 0; else withoutFavourites" class="product-list">
+    <app-product *ngFor="let product of favouriteProduct" [product]="product"></app-product>
+</div>
+
+<ng-template #withoutFavourites>
+    <div>There are no products selected as favourites</div>
+</ng-template>
