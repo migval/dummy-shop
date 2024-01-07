@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { UserDto } from "./dtos/user.dto";
 import { UserService } from "./user.service";
+import { FavouriteProductsService } from "src/app/products/services/favourite-products.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private http: HttpClient, private userService: UserService) { }
+    constructor(private http: HttpClient, private userService: UserService, private favSrv: FavouriteProductsService) { }
 
     login(username: string, password: string): Observable<UserDto> {
         return this.http.post<UserDto>(`${environment.apiUrl}/auth/login`, { username, password }).pipe(
@@ -20,5 +21,6 @@ export class AuthService {
 
     logout(): void {
         this.userService.setUser(null);
+        this.favSrv.clearFavourites();
     }
 }

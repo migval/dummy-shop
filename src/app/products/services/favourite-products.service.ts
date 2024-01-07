@@ -19,7 +19,7 @@ export class FavouriteProductsService {
         }
     }
 
-    setProductAsFavourite(product: CustomProductDto): void {
+    public setProductAsFavourite(product: CustomProductDto): void {
         if (this.isFavourite(product.id)) {
             return;
         }
@@ -29,7 +29,7 @@ export class FavouriteProductsService {
         this._favouriteProducts$.next(favouriteProducts);
     }
 
-    removeProductFromFavourites(productId: number): void {
+    public removeProductFromFavourites(productId: number): void {
         const favouriteProducts = this._favouriteProducts$.getValue();
         const newFavouriteProducts = favouriteProducts.filter(product => product.id !== productId);
         localStorage.setItem('favouriteProducts', JSON.stringify(newFavouriteProducts));
@@ -42,7 +42,12 @@ export class FavouriteProductsService {
         );
     }
 
-    public isFavourite(productId: number): boolean {
+    private isFavourite(productId: number): boolean {
         return this._favouriteProducts$.getValue().some(product => product.id === productId);
+    }
+
+    public clearFavourites(): void {
+        localStorage.setItem('favouriteProducts', JSON.stringify([]));
+        this._favouriteProducts$.next([]);
     }
 }
