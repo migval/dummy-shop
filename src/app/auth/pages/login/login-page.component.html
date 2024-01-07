@@ -1,0 +1,12 @@
+<div class="logo">
+    <img src="/assets/images/logo.png" alt="DummyShop" class="logo">
+</div>
+<form class="form" (ngSubmit)="login($event)">
+    <input type="text" [(ngModel)]="username" name="username" placeholder="Username" class="form-control">
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Password" class="form-control">
+    <button type="submit" [disabled]="!isValidForm()">Login</button>
+</form>
+
+<div class="invalid-login-error" *ngIf="invalidLogin">
+    Nombre de usuario o contraseña incorrectos
+</div>
