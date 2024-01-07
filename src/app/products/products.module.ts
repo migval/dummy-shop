@@ -3,11 +3,13 @@ import { DashboardPageComponent } from "./pages/dashboard-page/dashboard-page.co
 import { ProductsRoutingModule } from "./products-routing.module";
 import { CommonModule } from "@angular/common";
 import { ProductComponent } from "./components/product/product.component";
+import { FavouriteButtonComponent } from "./components/favourite-button/favourite-button.component";
 
 @NgModule({
     declarations: [
         DashboardPageComponent,
-        ProductComponent
+        ProductComponent,
+        FavouriteButtonComponent
     ],
     imports: [
         CommonModule,

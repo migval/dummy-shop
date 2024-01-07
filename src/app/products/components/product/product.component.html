@@ -4,6 +4,10 @@
     <section class="info">
         <div class="title-line">
             <h1 class="title">{{product.title}}</h1>
+            <app-favourite-button 
+                [selected]="(favSrv.isFavourite$(product.id) | async) || false"
+                (selectedChange)="setFavourite($event)"
+            ></app-favourite-button>
         </div>
         <p class="description">{{product.description}}</p> 
         <div>{{product.price}} €</div>
