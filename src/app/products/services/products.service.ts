@@ -4,6 +4,7 @@ import { Observable, switchMap, take } from "rxjs";
 import { UserService } from "src/app/auth/services/user.service";
 import { environment } from "src/environments/environment";
 import { ProductsResponse } from "./dtos/products-response";
+import { FullProductDto } from "./dtos/full-product.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -22,17 +23,19 @@ export class ProductsService {
         const paramsUrl = new URLSearchParams(params).toString();
         const request = `${this.url}?${paramsUrl}`;
 
-        return this.userSrv.user$.pipe(
-            take(1),
-            switchMap(user => {
-                if (!user) {
-                    throw new Error('Not authenticated user')
-                }
+        return this.http.get<ProductsResponse<T>>(request);
+    }
 
-                const headers = { Authorization: `Bearer ${user.token}` };
-                return this.http.get<ProductsResponse<T>>(request, { headers });
-            }
-        ));
+    public addProduct(product: Omit<FullProductDto, 'id'>): Observable<FullProductDto> {
+        return this.http.post<FullProductDto>(`${this.url}/add`, product);
+    }
+
+    public editProduct(id: string, product: Partial<Omit<FullProductDto, 'id'>>): Observable<FullProductDto> {
+        return this.http.patch<FullProductDto>(`${this.url}/${id}`, product);
+    }
+
+    public deleteProduct(id: string): Observable<FullProductDto> {
+        return this.http.delete<FullProductDto>(`${this.url}/${id}`);
     }
 
 }
