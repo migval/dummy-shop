@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { catchError } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPageComponent {
 
     invalidLogin: boolean = false;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
     public isValidForm(): boolean {
         return this.username.trim().length > 0 && this.password.length > 0;
@@ -31,8 +32,8 @@ export class LoginPageComponent {
                 return err;
             })
         )
-        .subscribe((user) => {
-            console.log(user);
+        .subscribe(() => {
+            this.router.navigate(['/']);
         });
     }
 }
