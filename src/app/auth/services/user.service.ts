@@ -18,6 +18,12 @@ export class UserService {
     }
 
     public setUser(user: UserDto | null): void {
+        if (!user) {
+            localStorage.removeItem('user');
+            this._user$.next(null);
+            return;
+        }
+
         localStorage.setItem('user', JSON.stringify(user));
         this._user$.next(user);
     }

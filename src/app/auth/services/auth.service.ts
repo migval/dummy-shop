@@ -17,4 +17,8 @@ export class AuthService {
             tap(user => this.userService.setUser(user))
         );
     }
+
+    logout(): void {
+        this.userService.setUser(null);
+    }
 }
