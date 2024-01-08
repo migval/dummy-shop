@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { ProductComponent } from "./components/product/product.component";
 import { FavouriteButtonComponent } from "./components/favourite-button/favourite-button.component";
 import { FavouritesPageComponent } from "./pages/favourites-page/favourites-page.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { FavouritesPageComponent } from "./pages/favourites-page/favourites-page
     ],
     imports: [
         CommonModule,
-        ProductsRoutingModule
+        ProductsRoutingModule,
+        SharedModule
     ],
     exports: [],
     providers: [],
